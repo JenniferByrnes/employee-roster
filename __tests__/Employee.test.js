@@ -1,104 +1,41 @@
 
-getName()
+const Employee = require('../lib/Employee.js');
 
-getId()
-
-getEmail()
-
-getRole() // Returns 'Employee'
-
-
-// Sample taken from game project.
-
-const employee = require('../lib/employee.js');
-const Potion = require('../lib/Potion.js');
-
-jest.mock('../lib/Potion.js');
+//jest.mock('../lib/Employee.js');
 
 test('creates an employee object', () => {
-  const employee = new employee('Dave');
+  const employee = new Employee(10, 'Dave', "dave@comcast.net");
 
   expect(employee.name).toBe('Dave');
-  expect(employee.Id).toEqual(expect.any(Number));
-  expect(employee.email).toEqual(expect.any(String));
+  expect(employee.id).toEqual(10);
+  expect(employee.email).toEqual("dave@comcast.net");
   expect(employee.role).toBe('Employee');
 
 });
 
-test("gets employee's data as an object", () => {
-  const employee = new employee('Dave');
+test('gets name from employee object', () => {
+  const employee = new Employee(10, 'Dave', "dave@comcast.net");
 
-  expect(employee.getStats()).toHaveProperty('name');
-  expect(employee.getStats()).toHaveProperty('Id');
-  expect(employee.getStats()).toHaveProperty('email');
-  expect(employee.getStats()).toHaveProperty('role');
-});
-
-test('gets inventory from employee or returns false', () => {
-  const employee = new employee('Dave');
-
-  expect(employee.getInventory()).toEqual(expect.any(Array));
-
-  employee.inventory = [];
-
-  expect(employee.getInventory()).toEqual(false);
+  expect(employee.getName()).toEqual('Dave');
 });
 
 test('gets employee Id value', () => {
-  const employee = new employee('Dave');
+  const employee = new Employee(10, 'Dave', "dave@comcast.net");
+  employee.id = 10;
 
-  expect(employee.getId()).toEqual(expect.stringContaining(employee.Id.toString()));
+  expect(employee.getId()).toEqual(10);
 });
 
-test('checks if employee is alive or not', () => {
-  const employee = new employee('Dave');
+test('gets employee email value', () => {
+  const employee = new Employee(10, 'Dave', "dave@comcast.net");
+  employee.email = 'dave@comcast.net';
 
-  expect(employee.isAlive()).toBeTruthy();
-
-  employee.Id = 0;
-
-  expect(employee.isAlive()).toBeFalsy();
+  expect(employee.getEmail()).toBe('dave@comcast.net');
 });
 
-test("subtracts from employee's Id", () => {
-  const employee = new employee('Dave');
-  const oldId = employee.Id;
+test('gets employee role value', () => {
+  const employee = new Employee(10, 'Dave', "dave@comcast.net");
+  employee.role = 'Employee';
 
-  employee.reduceId(5);
-
-  expect(employee.Id).toBe(oldId - 5);
-
-  employee.reduceId(99999);
-  expect(employee.Id).toBe(0);
-
-});
-
-test("gets employee's attack value", () => {
-  const employee = new employee('Dave');
-  employee.email = 10;
-
-  expect(employee.getAttackValue()).toBeGreaterThanOrEqual(5);
-  expect(employee.getAttackValue()).toBeLessThanOrEqual(15);
-
-});
-
-test("adds a potion to the inventory", () => {
-  const employee = new employee('Dave');
-  const oldCount = employee.inventory.length;
-
-  employee.addPotion(new Potion());
-
-  expect(employee.inventory.length).toBeGreaterThan(oldCount);
-  
-});
-
-test("uses a potion from the inventory", () => {
-  const employee = new employee('Dave');
-  employee.inventory = [new Potion(), new Potion(), new Potion()];
-  const oldCount = employee.inventory.length;
-
-  employee.usePotion(1);
-
-  expect(employee.inventory.length).toBeLessThan(oldCount);
-  
+  expect(employee.getRole()).toBe('Employee');
 });
