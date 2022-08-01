@@ -2,7 +2,7 @@ const inquirer = require('inquirer');
 //const generatePage = require('./src/page-template');
 //const { writeFile, copyFile } = require('./utils/generate-site.js');
 
-//const Employee = require('./lib/Employee.js');
+// These classes define employee types
 const Manager = require('./lib/Manager.js');
 const Engineer = require('./lib/Engineer.js');
 const Intern = require('./lib/Intern.js');
@@ -156,72 +156,43 @@ const promptUser = () => {
   })
 };
  
-
-const mockData = 
-{
-  nameInput: 'Addie',
-  idInput: '10',
-  emailInput: 'addie@email.com',
-  officeNumInput: '20',
-  nextTeam: "Engineer",
-  nameInput: 'Betty',
-  idInput: '11',
-  emailInput: 'betty@email.com',
-  githubInput: 'bettygithub',
-  nextTeam: "Engineer",
-  nameInput: 'Carla',
-  idInput: '12',
-  emailInput: 'carla@email.com',
-  githubInput: 'carlaygithub',
-  nextTeam: "Intern",
-  nameInput: 'Dara',
-  idInput: '13',
-  emailInput: 'dara@email.com',
-  schoolInput: 'Dartmouth',
-  nextTeam: "Intern",
-  nameInput: 'Erika',
-  idInput: '14',
-  emailInput: 'erica@email.com',
-  schoolInput: 'Emory',
-  nextTeam: "Finish building my team"
-}
 const mockArray =
 [
-  Manager {
-    name: 'able',
+  Manager [{
+    name: 'Anne',
     id: '1',
-    email: 'fdsfds',
+    email: 'Anne@email.com',
     role: 'Manager',
-    officeNumber: '2'
-  },
-  Intern {
-    name: 'bill',
+    officeNumber: '101'
+  }],
+  Intern [{
+    name: 'Barb',
     id: '32',
-    email: 'rewrewrwe',
+    email: 'Barb@email.com',
     role: 'Intern',
-    school: 'emoty'
-  },
-  Intern {
-    name: 'carol',
+    school: 'Emory'
+  }],
+  Intern [{
+    name: 'Carol',
     id: '3',
-    email: 'reerw',
+    email: 'carol@email.com',
     role: 'Intern',
-    school: 'emory'
-  },
-  Engineer {
-    name: 'dara',
+    school: 'UMich'
+  }],
+  Engineer [{
+    name: 'Dara',
     id: '4',
-    email: 'fds',
+    email: 'dara@email.com',
     role: 'Engineer',
-    github: 'rewrewrew'
-  },
-  Engineer {
-    name: 'edith',
+    github: 'daragithub'
+  }],
+  Engineer [{
+    name: 'Edith',
     id: '5',
-    email: 'fds',
+    email: 'edith@email.com',
     role: 'Engineer',
-    github: 'twtrwtwer'
-  }
+    github: 'edithgithub'
+  }]
 ]
 
 promptUser()
