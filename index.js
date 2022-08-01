@@ -2,14 +2,16 @@ const inquirer = require('inquirer');
 //const generatePage = require('./src/page-template');
 //const { writeFile, copyFile } = require('./utils/generate-site.js');
 
-const Employee = require('./lib/Employee.js');
+//const Employee = require('./lib/Employee.js');
 const Manager = require('./lib/Manager.js');
 const Engineer = require('./lib/Engineer.js');
 const Intern = require('./lib/Intern.js');
 
+// Array for all employees
+const employeeArray = [];
+
 // Set 1st employee
 var employeeRole = "Manager";
-var doneWithInput = false;
 
 const promptUser = () => {
   return inquirer.prompt([
@@ -100,94 +102,135 @@ const promptUser = () => {
       message: 'Please check the box to add team members or to display your roster',
       choices: ['Engineer', 'Intern', 'Finish building my team']
     }
-  ]);
-};
-    
-
-
-
-
-
-
-/*
-  // If there's no 'projects' array property, create one
-  if (!portfolioData.projects) {
-    portfolioData.projects = [];
-  }
-  return inquirer
-    .prompt([
-      {
-        type: 'input',
-        name: 'name',
-        message: 'What is the name of your project? (Required)',
-        validate: nameInput => {
-          if (nameInput) {
-            return true;
-          } else {
-            console.log('You need to enter a project name!');
-            return false;
-          }
-  
-    .then(projectData => {
-      portfolioData.projects.push(projectData);
-      if (projectData.confirmAddProject) {
-        return promptProject(portfolioData);
-      } else {
-        return portfolioData;
-      }
-    });
-};
-*/
-
-
-//INFINITE LOOP!!!!!
-console.log("doneWithInput=", doneWithInput);
-while (!doneWithInput) {
-  promptUser()
-  .then((answers) => {
-    console.log(answers);
+  ])
+  .then ((answers )=> {
     switch (employeeRole) {
       case "Manager": 
-        const manager = {
-          name: answers.nameInput,
-          id: answers.idInput,
-          email: answers.emailInput,
-          officeNumber: answers.officeNumInput
-        }
-        console.log(manager);
+        const manager = new Manager(
+          answers.idInput,
+          answers.nameInput,
+          answers.emailInput,
+          answers.officeNumInput
+        )
+        employeeArray.push(manager)
         break;
-        case "Engineer": 
-        const engineer = {
-          name: answers.nameInput,
-          id: answers.idInput,
-          email: answers.emailInput,
-          github: answers.githubInput
-        }
-        console.log(engineer);
+      case "Engineer": 
+        const engineer = new Engineer(
+          answers.idInput,
+          answers.nameInput,
+          answers.emailInput,
+          answers.githubInput
+        )
+        employeeArray.push(engineer)
         break;
-        case "Intern": 
-        const intern = {
-          name: answers.nameInput,
-          id: answers.idInput,
-          email: answers.emailInput,
-          school: answers.schoolInput
-        }
-        console.log(intern);
+      case "Intern": 
+        const intern = new Intern(
+          answers.idInput,
+          answers.nameInput,
+          answers.emailInput,
+          answers.schoolInput
+        )
+        employeeArray.push(intern)
         break;
       default:
-        console.log("finshed jkb");
-        doneWithInput = true;
-        console.log("doneWithInput Last=", doneWithInput);
+        // This is never executed.
+        break;
     }
-    console.log(answers.nextTeam);
     employeeRole = answers.nextTeam;
-
-  })
+    switch (answers.nextTeam){
+      case "Intern":
+        promptUser();
+        break;
+      case "Engineer":
+        promptUser();
+        break;
+      default:
+        console.log("done with promptUser - employeeArray = ");
+        console.log(employeeArray);
+        // write to file function - here (put it here) name of file and data (data is generate markdown external function)
+        break;
+    }
+  }) 
   .catch(err => {
     console.log(err);
   })
+};
+ 
+
+const mockData = 
+{
+  nameInput: 'Addie',
+  idInput: '10',
+  emailInput: 'addie@email.com',
+  officeNumInput: '20',
+  nextTeam: "Engineer",
+  nameInput: 'Betty',
+  idInput: '11',
+  emailInput: 'betty@email.com',
+  githubInput: 'bettygithub',
+  nextTeam: "Engineer",
+  nameInput: 'Carla',
+  idInput: '12',
+  emailInput: 'carla@email.com',
+  githubInput: 'carlaygithub',
+  nextTeam: "Intern",
+  nameInput: 'Dara',
+  idInput: '13',
+  emailInput: 'dara@email.com',
+  schoolInput: 'Dartmouth',
+  nextTeam: "Intern",
+  nameInput: 'Erika',
+  idInput: '14',
+  emailInput: 'erica@email.com',
+  schoolInput: 'Emory',
+  nextTeam: "Finish building my team"
 }
-console.log("end of input");
+const mockArray =
+[
+  Manager {
+    name: 'able',
+    id: '1',
+    email: 'fdsfds',
+    role: 'Manager',
+    officeNumber: '2'
+  },
+  Intern {
+    name: 'bill',
+    id: '32',
+    email: 'rewrewrwe',
+    role: 'Intern',
+    school: 'emoty'
+  },
+  Intern {
+    name: 'carol',
+    id: '3',
+    email: 'reerw',
+    role: 'Intern',
+    school: 'emory'
+  },
+  Engineer {
+    name: 'dara',
+    id: '4',
+    email: 'fds',
+    role: 'Engineer',
+    github: 'rewrewrew'
+  },
+  Engineer {
+    name: 'edith',
+    id: '5',
+    email: 'fds',
+    role: 'Engineer',
+    github: 'twtrwtwer'
+  }
+]
+
+promptUser()
+// This is what may be used to bypass promptUser typing
+// or use mockArray....
+//const pageHTML = generatePage(mockData);
+ 
+
+
 /*
   promptUser()
   .then(promptProject)
