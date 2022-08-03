@@ -45,5 +45,10 @@ Run "npm run test" from the command line in the __tests__ directory to test obje
 GitHub profile: https://github.com/jenniferbyrnes
 
 Please address any questions to me at jennifer.byrnes@outlook.com
+
+## Screenshot of generated HTML
+
+![Screen Shot](https://user-images.githubusercontent.com/105435313/182707415-0e4e9981-e6d0-470d-b1e4-c44ab98f4bdb.png)
+
   
   
