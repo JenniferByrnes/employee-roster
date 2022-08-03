@@ -3,7 +3,6 @@ let i = 0;
 
 // Generates HTML card for each employee entered.
 const generateEmployees = employeesArr => {
-  console.log("in genEmps ---- employeesArr= ", employeesArr);
   return `
 
   ${employeesArr
@@ -22,7 +21,7 @@ const generateEmployees = employeesArr => {
           icon += "../dist/coffee-cup.png"
         } else if (role == 'Engineer') {
           // Github is a clickable link
-          lastLine += "Github: <a href='https://" + lastItem + "'>" + lastItem + "</a>"
+          lastLine += "Github: <a href='https://github.com/" + lastItem + "'>" + lastItem + "</a>"
           icon += "../dist/engineer.png"
         }
         else { 
