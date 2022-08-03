@@ -19,6 +19,7 @@ https://drive.google.com/file/d/1QJX-XJueUjszrb5sLUTa1-VLwr6qJ9cr/view
 - [How to Contribute](#How-to-Contribute)
 - [Tests](#Tests)
 - [Questions?](#Questions)
+- [Screenshot of generated HTML](#Screenshot-of-generated-HTML)
 
 ## Installation
 
