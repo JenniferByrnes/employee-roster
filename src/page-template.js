@@ -1,26 +1,27 @@
 
 let i = 0;
+
+// Generates HTML card for each employee entered.
 const generateEmployees = employeesArr => {
   console.log("in genEmps ---- employeesArr= ", employeesArr);
   return `
 
   ${employeesArr
-      .map(function ({ name, id, email, role, ...lastField }) {
+      .map(function ({ name, id, email, ...lastField }) {
  
-        console.log('obj entry array =', Object.getOwnPropertyNames(employeesArr));
-        console.log('i =',i);
-        console.log('***constr name1 *** =',employeesArr[i].constructor.name);
-        console.log('instance of..........................');
+        // Get the name of the Employee object (Manager, Intern...)
+        const role = employeesArr[i].constructor.name;
 
-        const lastKey = Object.keys(lastField);
+        // lastField is the school name, office number or github
         const lastItem = Object.values(lastField);
         var lastLine = "";
         var icon = "";
         
-        if (lastKey == 'officeNumber') {
+        if (role == 'Manager') {
           lastLine += "Office Number: " + lastItem
           icon += "../dist/coffee-cup.png"
-        } else if (lastKey == 'github') {
+        } else if (role == 'Engineer') {
+          // Github is a clickable link
           lastLine += "Github: <a href='https://" + lastItem + "'>" + lastItem + "</a>"
           icon += "../dist/engineer.png"
         }
@@ -28,7 +29,7 @@ const generateEmployees = employeesArr => {
           lastLine += "School: " + lastItem
           icon += "../dist/cap.png"
         }
-        //console.log("Last lastLine=",lastLine);
+
         i = i + 1;
         return `
   <div class="card m-3">
@@ -42,7 +43,7 @@ const generateEmployees = employeesArr => {
       </div>
       <div class="media-content">
         <p class="title is-size-4 pt-5">${name}</p>
-        <p class="subtitle is-size-5 has-text-weight-bold">${employeesArr[i].constructor.name}</p>
+        <p class="subtitle is-size-5 has-text-weight-bold">${role}</p>
       </div>
     </div>
   </div>
@@ -66,7 +67,8 @@ const generateEmployees = employeesArr => {
 };
 
 module.exports = templateData => {
-  // This is the top of the HTML - the call inside of it, gets the 
+  // This is the top and bottom of the HTML 
+  // the call inside of it gets the 
   // employees and generates a card for each one.
   return `
   <!DOCTYPE html>

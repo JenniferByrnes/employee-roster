@@ -8,7 +8,6 @@ test('creates a intern object', () => {
   expect(intern.name).toBe('Dave');
   expect(intern.id).toEqual(10);
   expect(intern.email).toEqual("dave@comcast.net");
-  expect(intern.role).toBe('Intern');
   expect(intern.school).toBe("Emory");
 
 });

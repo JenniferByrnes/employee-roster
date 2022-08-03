@@ -9,7 +9,6 @@ test('creates an employee object', () => {
   expect(employee.name).toBe('Dave');
   expect(employee.id).toEqual(10);
   expect(employee.email).toEqual("dave@comcast.net");
-  expect(employee.role).toBe('Employee');
 
 });
 

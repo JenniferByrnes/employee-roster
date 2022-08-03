@@ -236,35 +236,30 @@ const mockArray =
       name: 'Anne',
       id: '1',
       email: 'Anne@email.com',
-      role: 'Manager',
       officeNumber: '101'
     }],
     Intern [{
       name: 'Barb',
       id: '32',
       email: 'Barb@email.com',
-      role: 'Intern',
       school: 'Emory'
     }],
     Intern [{
       name: 'Carol',
       id: '3',
       email: 'carol@email.com',
-      role: 'Intern',
       school: 'UMich'
     }],
     Engineer [{
       name: 'Dara',
       id: '4',
       email: 'dara@email.com',
-      role: 'Engineer',
       github: 'daragithub'
     }],
     Engineer [{
       name: 'Edith',
       id: '5',
       email: 'edith@email.com',
-      role: 'Engineer',
       github: 'edithgithub'
     }]
   ]
