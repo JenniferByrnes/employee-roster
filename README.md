@@ -6,6 +6,10 @@
 
 Creates a webpage based on employee data entered at the command line.
 
+## Video Walkthrough
+
+https://drive.google.com/file/d/1QJX-XJueUjszrb5sLUTa1-VLwr6qJ9cr/view
+
 ## Table of Contents
 
 - [Installation](#installation)
