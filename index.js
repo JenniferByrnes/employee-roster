@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
-//const generatePage = require('./src/page-template');
+const fs = require('fs');
+const generatePage = require('./src/page-template');
 //const { writeFile, copyFile } = require('./utils/generate-site.js');
 
 // These classes define employee types
@@ -103,121 +104,128 @@ const promptUser = () => {
       choices: ['Engineer', 'Intern', 'Finish building my team']
     }
   ])
-  .then ((answers )=> {
-    switch (employeeRole) {
-      case "Manager": 
-        const manager = new Manager(
-          answers.idInput,
-          answers.nameInput,
-          answers.emailInput,
-          answers.officeNumInput
-        )
-        employeeArray.push(manager)
-        break;
-      case "Engineer": 
-        const engineer = new Engineer(
-          answers.idInput,
-          answers.nameInput,
-          answers.emailInput,
-          answers.githubInput
-        )
-        employeeArray.push(engineer)
-        break;
-      case "Intern": 
-        const intern = new Intern(
-          answers.idInput,
-          answers.nameInput,
-          answers.emailInput,
-          answers.schoolInput
-        )
-        employeeArray.push(intern)
-        break;
-      default:
-        // This is never executed.
-        break;
-    }
-    employeeRole = answers.nextTeam;
-    switch (answers.nextTeam){
-      case "Intern":
-        promptUser();
-        break;
-      case "Engineer":
-        promptUser();
-        break;
-      default:
-        console.log("done with promptUser - employeeArray = ");
-        console.log(employeeArray);
-        // write to file function - here (put it here) name of file and data (data is generate markdown external function)
-        break;
-    }
-  }) 
-  .catch(err => {
-    console.log(err);
-  })
+    .then((answers) => {
+      switch (employeeRole) {
+        case "Manager":
+          const manager = new Manager(
+            answers.idInput,
+            answers.nameInput,
+            answers.emailInput,
+            answers.officeNumInput
+          )
+          employeeArray.push(manager)
+          break;
+        case "Engineer":
+          const engineer = new Engineer(
+            answers.idInput,
+            answers.nameInput,
+            answers.emailInput,
+            answers.githubInput
+          )
+          employeeArray.push(engineer)
+          break;
+        case "Intern":
+          const intern = new Intern(
+            answers.idInput,
+            answers.nameInput,
+            answers.emailInput,
+            answers.schoolInput
+          )
+          employeeArray.push(intern)
+          break;
+        default:
+          // This is never executed.
+          break;
+      }
+      employeeRole = answers.nextTeam;
+      switch (answers.nextTeam) {
+        case "Intern":
+          promptUser();
+          break;
+        case "Engineer":
+          promptUser();
+          break;
+        default:
+          // write to file function - here (put it here) name of file and data (data is generate markdown external function)
+          writeFile(generatePage(employeeArray));
+          break;
+      }
+    })
+    .catch(err => {
+      console.log(err);
+    })
 };
- 
+
+// Writes HTML file to the distribution directory
+const writeFile = fileContent => {
+  return new Promise((resolve, reject) => {
+    fs.writeFile('./dist/index.html', fileContent, err => {
+      // if there's an error, reject the Promise and send the error to the Promise's `.catch()` method
+      if (err) {
+        reject(err);
+        // return out of the function here to make sure the Promise doesn't accidentally execute the resolve() function as well
+        return;
+      }
+
+      // if everything went well, resolve the Promise and send the successful data to the `.then()` method
+      resolve({
+        ok: true,
+        message: 'File created!'
+      });
+    });
+  });
+};
+/*
 const mockArray =
-[
-  Manager [{
-    name: 'Anne',
-    id: '1',
-    email: 'Anne@email.com',
-    role: 'Manager',
-    officeNumber: '101'
-  }],
-  Intern [{
-    name: 'Barb',
-    id: '32',
-    email: 'Barb@email.com',
-    role: 'Intern',
-    school: 'Emory'
-  }],
-  Intern [{
-    name: 'Carol',
-    id: '3',
-    email: 'carol@email.com',
-    role: 'Intern',
-    school: 'UMich'
-  }],
-  Engineer [{
-    name: 'Dara',
-    id: '4',
-    email: 'dara@email.com',
-    role: 'Engineer',
-    github: 'daragithub'
-  }],
-  Engineer [{
-    name: 'Edith',
-    id: '5',
-    email: 'edith@email.com',
-    role: 'Engineer',
-    github: 'edithgithub'
-  }]
-]
-
+  [
+    Manager [{
+      name: 'Anne',
+      id: '1',
+      email: 'Anne@email.com',
+      role: 'Manager',
+      officeNumber: '101'
+    }],
+    Intern [{
+      name: 'Barb',
+      id: '32',
+      email: 'Barb@email.com',
+      role: 'Intern',
+      school: 'Emory'
+    }],
+    Intern [{
+      name: 'Carol',
+      id: '3',
+      email: 'carol@email.com',
+      role: 'Intern',
+      school: 'UMich'
+    }],
+    Engineer [{
+      name: 'Dara',
+      id: '4',
+      email: 'dara@email.com',
+      role: 'Engineer',
+      github: 'daragithub'
+    }],
+    Engineer [{
+      name: 'Edith',
+      id: '5',
+      email: 'edith@email.com',
+      role: 'Engineer',
+      github: 'edithgithub'
+    }]
+  ]
+  */
+//______________  Real stuff ______________//
 promptUser()
-// This is what may be used to bypass promptUser typing
-// or use mockArray....
-//const pageHTML = generatePage(mockData);
- 
-
+//generatePage(employeeArray);
+//______________  Mock stuff ______________//
 
 /*
-  promptUser()
-  .then(promptProject)
-  .then(portfolioData => {
-    return generatePage(portfolioData);
-  })
-  .then(pageHTML => {
-    return writeFile(pageHTML);
-  })
-  .then(writeFileResponse => {
-    console.log(writeFileResponse);
-    return copyFile();
-  })
-  .then(copyFileResponse => {
-    console.log(copyFileResponse);
-  })
-  .catch(err => {
-    console.log(err);
-  })*/
+return generatePage(mockArray)
+.then(pageHTML => {
+  return writeFile(pageHTML);
+})
+.catch(err => {
+  console.log(err);
+});
+*/

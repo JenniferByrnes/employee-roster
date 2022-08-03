@@ -1,10 +1,10 @@
 
-# README-generator
+# employee-roster
  [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
 ## Description:
 
-Writes a high quality README.md file based on console input.
+Creates a webpage based on employee data entered at the command line.
 
 ## Table of Contents
 
