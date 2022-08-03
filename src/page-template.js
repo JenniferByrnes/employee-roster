@@ -1,43 +1,48 @@
 
+let i = 0;
 const generateEmployees = employeesArr => {
   console.log("in genEmps ---- employeesArr= ", employeesArr);
   return `
 
   ${employeesArr
-      .map(({ name, id, email, role, ...lastField }) => {
-        console.log("in genEmps ---- role= ", role);
-        console.log("in genEmps ---- lastField= ", lastField);
-        console.log('obj key array =', Object.keys(employeesArr));
+      .map(function ({ name, id, email, role, ...lastField }) {
+ 
+        console.log('obj entry array =', Object.getOwnPropertyNames(employeesArr));
+        console.log('i =',i);
+        console.log('***constr name1 *** =',employeesArr[i].constructor.name);
+        console.log('instance of..........................');
 
         const lastKey = Object.keys(lastField);
         const lastItem = Object.values(lastField);
-        console.log('lastKey =', lastKey);
-        console.log('lastItem =', lastItem);
+        var lastLine = "";
+        var icon = "";
         
         if (lastKey == 'officeNumber') {
-          const lastLine = "Office Number: " + lastItem;
-          console.log(lastLine);
+          lastLine += "Office Number: " + lastItem
+          icon += "../dist/coffee-cup.png"
         } else if (lastKey == 'github') {
-          const lastLine = "Github: " + lastItem;
-          console.log(lastLine);
+          lastLine += "Github: <a href='https://" + lastItem + "'>" + lastItem + "</a>"
+          icon += "../dist/engineer.png"
         }
         else { 
-          const lastLine = "School: " + lastItem;
-          console.log(lastLine);
-        };
-        //console.log(lastLine);
+          lastLine += "School: " + lastItem
+          icon += "../dist/cap.png"
+        }
+        //console.log("Last lastLine=",lastLine);
+        i = i + 1;
         return `
   <div class="card m-3">
   <div class="card-header has-background-success">
     <div class="media">
       <div class="media-left m-5">
         <figure class="image is-48x48">
-          <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+          <img src=${icon} 
+          alt="Placeholder image">
         </figure>
       </div>
       <div class="media-content">
         <p class="title is-size-4 pt-5">${name}</p>
-        <p class="subtitle is-size-5 has-text-weight-bold">${role}</p>
+        <p class="subtitle is-size-5 has-text-weight-bold">${employeesArr[i].constructor.name}</p>
       </div>
     </div>
   </div>
@@ -50,7 +55,7 @@ const generateEmployees = employeesArr => {
     </p>
   </div>
   <div class="card-content my-1 py-3 has-background-warning-light">
-    <p class="is-size-5">"${lastLine}"</p>
+    <p class="is-size-5">${lastLine}</p>
   </div>
 </div>
 `
@@ -90,6 +95,9 @@ module.exports = templateData => {
     <main class="container is-flex is-flex-wrap-wrap my-5">
     ${generateEmployees(templateData)}
     </main>
+    <footer class="container text-center py-3">
+    <h3 class="text-dark">&copy; <a href="https://www.flaticon.com" title="icons">icon created by deemakdaksina - Flaticon</a></h3>
+  </footer>
   </body>
   </html>
   `;

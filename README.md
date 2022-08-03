@@ -1,6 +1,6 @@
 
-# employee-roster
- [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+# Employee Roster
+
 
 ## Description:
 
@@ -26,7 +26,7 @@ Run index.js from the command line
 
 ## License
 
-licensed under the [BSD](https://choosealicense.com/licenses/bsd/) license
+None
 
 ## How to Contribute
 
@@ -34,7 +34,7 @@ Fork the repository and do a pull request for your code to be reviewed.
 
 ## Tests
 
-None
+Run "npm run test" from the command line in the __tests__ directory to test object classes.
 
 ## Questions?
 

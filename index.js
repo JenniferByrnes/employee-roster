@@ -148,6 +148,9 @@ const promptUser = () => {
         default:
           // write to file function - here (put it here) name of file and data (data is generate markdown external function)
           writeFile(generatePage(employeeArray));
+          copyFile1();
+          copyFile2();
+          copyFile3();
           break;
       }
     })
@@ -171,6 +174,57 @@ const writeFile = fileContent => {
       resolve({
         ok: true,
         message: 'File created!'
+      });
+    });
+  });
+};
+const copyFile1 = () => {
+  return new Promise((resolve, reject) => {
+    fs.copyFile('./src/cap.png', './dist/cap.png', err => {
+      // if there's an error, reject the Promise and send the error to the Promise's `.catch()` method
+      if (err) {
+        reject(err);
+        // return out of the function here to make sure the Promise doesn't accidentally execute the resolve() function as well
+        return;
+      }
+      // if everything went well, resolve the Promise and send the successful data to the `.then()` method
+      resolve({
+        ok: true,
+        message: 'File copied!'
+      });
+    });
+  });
+};
+const copyFile2 = () => {
+  return new Promise((resolve, reject) => {
+    fs.copyFile('./src/coffee-cup.png', './dist/coffee-cup.png', err => {
+      // if there's an error, reject the Promise and send the error to the Promise's `.catch()` method
+      if (err) {
+        reject(err);
+        // return out of the function here to make sure the Promise doesn't accidentally execute the resolve() function as well
+        return;
+      }
+      // if everything went well, resolve the Promise and send the successful data to the `.then()` method
+      resolve({
+        ok: true,
+        message: 'File copied!'
+      });
+    });
+  });
+};
+const copyFile3 = () => {
+  return new Promise((resolve, reject) => {
+    fs.copyFile('./src/engineer.png', './dist/engineer.png', err => {
+      // if there's an error, reject the Promise and send the error to the Promise's `.catch()` method
+      if (err) {
+        reject(err);
+        // return out of the function here to make sure the Promise doesn't accidentally execute the resolve() function as well
+        return;
+      }
+      // if everything went well, resolve the Promise and send the successful data to the `.then()` method
+      resolve({
+        ok: true,
+        message: 'File copied!'
       });
     });
   });
